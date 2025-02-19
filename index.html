@@ -82,9 +82,10 @@
     </section>
 
     <section class="about" id="about">
-        
+
         <div class="main-text">
             <h2 class="heading">About Me</h2>
+            <span>Know Me Better</span>
         </div>
 
         <div class="about-content">
@@ -94,7 +95,7 @@
                 <h4>Research and Development Intern</h4>
                 <ul>
                     <li><p>Resolving software bugs and issues to enhance product stability and improve user experience</p></li>
-                    <li><p>Completing assigned tasks within deadlines, ensuring high quality and adherence to project requirements</p></li>
+                    <li><p>Completing assigned tasks within deadlines while ensuring high quality and adherence to project requirements</p></li>
                     <li><p>Collaborating with team members to troubleshoot issues and implement effective solutions</p></li>
                     <li><p>Demonstrating strong problem‑solving skills and adaptability in a dynamic software development environment</p></li>
                 </ul>
@@ -123,7 +124,7 @@
     <section class="project" id="project">
         <div class="main-text">
             <h2 class="heading">Projects</h2>
-            <span>Latest News & Post</span>
+            <span>My Work</span>
         </div>
 
         <div class="project-box swiper mySwiper">
@@ -134,9 +135,9 @@
                     </div>
                     <div class="card-info">
                         <h2>Facial Emotion Recognition using Deep Learning</h2>
-                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <span class="date">Tech Stack : Python, OpenCV, Keras, Numpy, Convolutional Neural Network                        </span>
                         <p class="excerpt">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                            Detecting facial emotions in real time using deep learning techniques.
                         </p>
                         <a href="#" class="readMore">Explore More</a>
                     </div>
@@ -148,11 +149,11 @@
                     </div>
                     <div class="card-info">
                         <h2>Binary Classification Model on Credit Card Default Dataset</h2>
-                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <span class="date">Tech Stack : Python, Sklearn, NumPy, Pandas, Matplotlib</span>
                         <p class="excerpt">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                            A Machine Learning model for predicting credit card defaults and mitigating financial risk.
                         </p>
-                        <a href="#" class="readMore">Explore More</a>
+                        <a href="https://github.com/udaypachigolla999/Binary-Classification-Model-on-Credit-Card-Default-Dataset" class="readMore">Explore More</a>
                     </div>
                 </div>
 
@@ -162,11 +163,11 @@
                     </div>
                     <div class="card-info">
                         <h2>Regression Model For House Price Prediction</h2>
-                        <span class="date">Sunday, Jan 14, 2023</span>
+                        <span class="date">Tech Stack : Python, Sklearn, NumPy, Pandas, Matplotlib</span>
                         <p class="excerpt">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, illo.
+                            Predicting house prices using Linear Regression model for data-driven real estate insights.
                         </p>
-                        <a href="#" class="readMore">Explore More</a>
+                        <a href="https://github.com/udaypachigolla999/Regression-Model-For-House-Price-Prediction" class="readMore">Explore More</a>
                     </div>
                 </div>
 
@@ -204,7 +205,7 @@
     <section class="education" id="education">
         <div class="main-text">
             <h2 class="heading">Education</h2>
-            <span>Latest News & Post</span>
+            <span>My Academic Journey</span>
         </div>
 
         <div class="education-details">
@@ -234,7 +235,8 @@
     <section class="certifications" id="certifications">
         
         <div class="main-text">
-            <h2 class="heading">Certification</h2>
+            <h2 class="heading">Certifications</h2>
+            <span>My Certifications</span>
         </div>
         <div class="certification-details">
             <div class="certification-item">
@@ -267,15 +269,14 @@
                 </div>
                 <form id="contactForm">
                     <div class="input-box">
-                        <input type="text" placeholder="First Name" id="lastName" name="firstName">
-                        <input type="text" placeholder="Last Name" id="lastName" name="lastName">
+                        <input type="text" placeholder="First Name" id="firstName" name="firstName" required>
+                        <input type="text" placeholder="Last Name" id="lastName" name="lastName" required>
                     </div>
-                    <input type="email" placeholder="Email" id="email" name="email">
-                    <input type="text" placeholder="Subject" id="subject" name="subject">
-                    <textarea cols="30" rows="10" placeholder="Message" id="message" name="message">
-                    </textarea>
+                    <input type="email" placeholder="Email" id="email" name="email" required>
+                    <input type="text" placeholder="Subject" id="subject" name="subject" required>
+                    <textarea cols="30" rows="10" placeholder="Message" id="message" name="message" required></textarea>
                     <div class="formBtn">
-                        <button type="submit" class="btn">Send Message</button>
+                        <button id="sendButton" type="submit" class="btn">Send Message</button>
                     </div>
                 </form>
             </div>
@@ -284,26 +285,36 @@
     </section>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-    (function(){
-        emailjs.init("pUG9X4n-LaA1O8J-X"); // Replace with your EmailJS Public Key
-    })();
+        (function(){
+            emailjs.init("pUG9X4n-LaA1O8J-X"); // Replace with your EmailJS Public Key
+        })();
 
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-        event.preventDefault();
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Stop default form submission
 
+        let sendButton = document.getElementById("sendButton");
+
+        // Disable button and show loading text
+        sendButton.disabled = true;
+        sendButton.innerText = "Sending...";
+
+        // Send email using emailjs
         emailjs.sendForm("service_5h1if59", "template_jvaok7n", this)
             .then(function() {
                 alert("Message sent successfully!");
                 document.getElementById("contactForm").reset();
-            }, function(error) {
+            })
+            .catch(function(error) {
                 alert("Failed to send message. Please try again.");
                 console.log("EmailJS Error:", error);
+            })
+            .finally(() => {
+                sendButton.disabled = false;
+                sendButton.innerText = "Send Message";
             });
-    });
+        });
     </script>
-    
-
-   
+  
 
     <div id="progress">
         <span id="progress-value">
