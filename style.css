@@ -1066,10 +1066,42 @@ footer{
     padding: 10px;
     border-radius: 10px;
     box-shadow: rgba(0,0,0,0.18)0px 2px 4px;
-    border-left: 7px solid #e6006d; 
-    border-right: 7px solid #e6006d; 
+    position: relative;
+    overflow: hidden; /* Prevents the pseudo-elements from overflowing */
+    /* border-left: 7px solid #e6006d; 
+    border-right: 7px solid #e6006d;  */
 }
 
+
+/* Left gradient border */
+.education-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px; /* Same width as border */
+    height: 100%;
+    background: linear-gradient(180deg, 
+                rgba(247,1,120,1) 0%, 
+                rgba(160,8,156,1) 51%, 
+                rgba(99,13,178,1) 100%);
+    border-radius: 10px 0 0 10px; /* Match container rounding */
+}
+
+/* Right gradient border */
+.education-item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 7px; /* Same width as border */
+    height: 100%;
+    background: linear-gradient(180deg, 
+                rgba(247,1,120,1) 0%, 
+                rgba(160,8,156,1) 51%, 
+                rgba(99,13,178,1) 100%);
+    border-radius: 0 10px 10px 0; /* Match container rounding */
+}
 
 
 .education-item p {
@@ -1107,6 +1139,78 @@ footer{
     padding: 10px;
     border-radius: 10px;
     box-shadow: rgba(0,0,0,0.18)0px 2px 4px;
-    border-left: 7px solid #e6006d; 
-    border-right: 7px solid #e6006d; 
+    /* border-left: 7px solid #e6006d; 
+    border-right: 7px solid #e6006d;  */
+}
+
+.certification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Needed for pseudo-elements */
+    overflow: hidden; /* Ensures gradient stays inside */
+}
+
+.certification-item h3 {
+    flex: 1; /* Allows text to take up available space */
+    margin: 0;
+}
+
+
+/* Left gradient border */
+.certification-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px; /* Same as border-left width */
+    height: 100%;
+    background: linear-gradient(180deg, 
+                rgba(247,1,120,1) 0%, 
+                rgba(160,8,156,1) 51%, 
+                rgba(99,13,178,1) 100%);
+    border-radius: 10px 0 0 10px; /* Match container rounding */
+}
+
+/* Right gradient border */
+.certification-item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 7px; /* Same as border-right width */
+    height: 100%;
+    background: linear-gradient(180deg, 
+                rgba(247,1,120,1) 0%, 
+                rgba(160,8,156,1) 51%, 
+                rgba(99,13,178,1) 100%);
+    border-radius: 0 10px 10px 0; /* Match container rounding */
+}
+
+.view-cert {
+    text-decoration: none; /* Removes underline */
+}
+
+.arrow-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--gradient-color-bg);
+    color: #fff;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    margin-right:10px ;
+}
+
+.arrow-box i {
+    color: white;
+    font-size: 30px;
+}
+
+.arrow-box:hover {
+    background: #a174b9;
+    box-shadow: var(--hover-box-shadow);
+    transform: translateX(5px);
 }
